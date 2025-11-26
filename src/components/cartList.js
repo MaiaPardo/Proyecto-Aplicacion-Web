@@ -56,6 +56,7 @@ export function cartList(){
   eventsOnClick(dataStorage);
   buttonCartActions();
   updateCartTotal();
+  updateCartBadge();
 }
 
 function eventsOnClick(productsStorage) {
@@ -98,6 +99,7 @@ function updateItem(item) {
   document.querySelector(`#qtty-${item.id}`).textContent = item.qtty;
   document.querySelector(`#subtotal-${item.id}`).textContent = (item.price * item.qtty).toFixed(2);
   updateCartTotal();
+  updateCartBadge();
 }
 
 function updateCartTotal() {
@@ -105,6 +107,25 @@ function updateCartTotal() {
   const total = cart.reduce((acc, it) => acc + (it.price * it.qtty), 0);
   const totalElement = document.querySelector('#cart-total');
   if (totalElement) totalElement.textContent = total.toFixed(2);
+}
+
+function updateCartBadge() {
+  const cart = getFromLocalStorage() || [];
+    
+  const totalItems = cart.reduce((acc, item) => acc + item.qtty, 0);
+
+  const badgeDesktop = document.querySelector('#cart-badge-desktop');
+  const badgeMobile = document.querySelector('#cart-badge-mobile');
+
+  if (badgeDesktop) {
+    badgeDesktop.textContent = totalItems;
+       
+    badgeDesktop.style.display = totalItems > 0 ? 'block' : 'none';
+  }
+  if (badgeMobile) {
+    badgeMobile.textContent = totalItems;
+    badgeMobile.style.display = totalItems > 0 ? 'block' : 'none';
+  }
 }
 
 function clearCart() {
