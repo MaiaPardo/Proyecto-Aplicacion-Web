@@ -1,7 +1,8 @@
 import { RenderCards } from "./src/components/cards.js";
-import {initLocalStorage} from "./storage/storage.js";
+import {initLocalStorage, clearCart} from "./storage/storage.js";
 import { cartList } from "./src/components/cartList.js";
 import { getProducts } from "./services/api.js";
+import { toast } from "./src/components/toast.js";
 
 initLocalStorage();
 
@@ -78,3 +79,35 @@ offcanvas.addEventListener('hide.bs.offcanvas', () => {
     btnTop.style.display = 'block';
   }
 });
+
+
+const checkoutForm = document.querySelector('#checkoutForm');
+const checkoutModalElement = document.querySelector('#checkoutModal');
+
+if (checkoutForm && checkoutModalElement) {
+
+  checkoutForm.addEventListener('submit', (e) => { e.preventDefault();
+        
+  const checkoutModal = bootstrap.Modal.getInstance(checkoutModalElement);
+
+    if (checkoutModal) { 
+            
+      const nombre = document.querySelector('#inputName').value;
+      const apellido = document.querySelector('#inputLastName').value;
+      const email = document.querySelector('#inputEmail').value;
+      const address = document.querySelector('#inputAddress').value;
+
+
+      checkoutModal.hide(); 
+
+      clearCart();
+      cartList(); 
+
+      const fullName = `${nombre} ${apellido}`;
+      const message = `Gracias ${fullName} por su compra. Le enviaremos su pedido a ${address} y su factura al mail ${email}.`;
+      toast(message, 'success');
+            
+      checkoutForm.reset(); 
+    }
+  });
+}

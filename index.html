@@ -110,6 +110,42 @@
 
   </div>
 
+  <!-- Modal Checkout -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkoutModalLabel">Datos de Envío y Facturación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm">
+          <div class="mb-3">
+            <label for="inputName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputName" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputLastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="inputLastName" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputAddress" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="inputAddress" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="checkoutForm" class="btn btn-primary" id="btn-confirm-purchase">Finalizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Botón Go to Top -->
 <button class="btn btn-primary rounded-circle" id="btn-top" title="Go to top">
